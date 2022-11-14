@@ -27,4 +27,15 @@ public class StudentService implements StudentFacade {
 
         return studentDao.addStudent(student);
     }
+
+    @Override
+    public boolean delStudentById(String id) {
+
+        return false;
+    }
+
+    @Override
+    public boolean updateStudentById(Student student) {
+        return false;
+    }
 }

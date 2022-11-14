@@ -37,4 +37,18 @@ public class StudentDao {
         studentMap.put(student.getId(), student);
         return true;
     }
+
+    public boolean delStudentById(String id) {
+        studentMap.remove(id);
+        return true;
+    }
+
+    public boolean updateStudentById(Student student) {
+        Student stu = findStudentById(String.valueOf(student.getId()));
+        stu.setAge(student.getAge());
+        stu.setName(student.getName());
+        stu.setSex(student.getSex());
+        studentMap.put(student.getId(), stu);
+        return true;
+    }
 }

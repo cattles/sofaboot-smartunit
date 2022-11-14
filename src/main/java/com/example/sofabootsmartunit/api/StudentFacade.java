@@ -13,4 +13,8 @@ public interface StudentFacade {
     public Student findStudentById(String id);
 
     public boolean addStudent(Student student);
+
+    public boolean delStudentById(String id);
+
+    public boolean updateStudentById(Student student);
 }
