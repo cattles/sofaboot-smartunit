@@ -17,38 +17,52 @@ import java.util.Map;
 @Repository
 public class StudentDao {
 
-    public Map<Integer, Student> studentMap = new HashMap<>();
+    public Map<Integer, Student> studentMap = new HashMap<Integer, Student>() {
+        @Override
+        public Student put(Integer key, Student value) {
+            Student student = new Student();
+            student.setId(1);
+            student.setSex("Male");
+            student.setName("StrawBird");
+            student.setAge(18);
+            return super.put(student.getId(), student);
+        }
+    };
 
 
     public StudentDao() {
-        Student student = new Student();
-        student.setId(1);
-        student.setSex("Male");
-        student.setName("StrawBird");
-        student.setAge(18);
-        studentMap.put(student.getId(), student);
     }
+
 
     public Student findStudentById(String id) {
         return studentMap.get(id);
     }
 
     public boolean addStudent(Student student) {
+        if(studentMap.containsKey(student.getId())) {
+            return false;
+        }
         studentMap.put(student.getId(), student);
         return true;
     }
 
     public boolean delStudentById(String id) {
-        studentMap.remove(id);
-        return true;
+        if(studentMap.containsKey(id)) {
+            studentMap.remove(id);
+            return true;
+        }
+        return false;
     }
 
     public boolean updateStudentById(Student student) {
         Student stu = findStudentById(String.valueOf(student.getId()));
-        stu.setAge(student.getAge());
-        stu.setName(student.getName());
-        stu.setSex(student.getSex());
-        studentMap.put(student.getId(), stu);
-        return true;
+        if(stu != null) {
+            stu.setAge(student.getAge());
+            stu.setName(student.getName());
+            stu.setSex(student.getSex());
+            studentMap.put(student.getId(), stu);
+            return true;
+        }
+        return false;
     }
 }

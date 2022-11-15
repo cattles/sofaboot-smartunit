@@ -31,11 +31,11 @@ public class StudentService implements StudentFacade {
     @Override
     public boolean delStudentById(String id) {
 
-        return false;
+        return studentDao.delStudentById(id);
     }
 
     @Override
     public boolean updateStudentById(Student student) {
-        return false;
+        return studentDao.updateStudentById(student);
     }
 }
